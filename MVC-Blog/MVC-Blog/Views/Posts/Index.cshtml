@@ -1,4 +1,6 @@
-﻿@model IEnumerable<MVC_Blog.Models.Post>
+﻿@using MVC_Blog.Classes;
+@using MVC_Blog.Models;
+@model IEnumerable<Post>
 
 @{
     ViewBag.Title = "Index";
@@ -12,15 +14,20 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Title)
+            Заглавия    @*@Html.DisplayNameFor(model => model.Title)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Body)
+            Съдържание  @*@Html.DisplayNameFor(model => model.Body)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Date)
+            Дата    @*@Html.DisplayNameFor(model => model.Date)*@
         </th>
-        <th></th>
+        <th>
+            Автор
+        </th>
+        <th>
+            Действия
+        </th>
     </tr>
 
 @foreach (var item in Model) {
@@ -29,10 +36,20 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Body)
+            @Utils.CutText(item.Body)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Date)
+        </td>
+        <td>
+            @if (item.Author != null)
+            {
+                @item.Author.UserName
+            }
+            else
+            {
+                    @:(Няма Автор)
+            }
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

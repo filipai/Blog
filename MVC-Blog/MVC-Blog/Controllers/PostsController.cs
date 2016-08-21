@@ -10,6 +10,7 @@ using MVC_Blog.Models;
 
 namespace MVC_Blog.Controllers
 {
+    [ValidateInput(false)]
     public class PostsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -17,7 +18,8 @@ namespace MVC_Blog.Controllers
         // GET: Posts
         public ActionResult Index()
         {
-            return View(db.Posts.ToList());
+            var postsWithAuthors = db.Posts.Include(p => p.Author).ToList();
+            return View(postsWithAuthors);
         }
 
         // GET: Posts/Details/5
@@ -46,10 +48,12 @@ namespace MVC_Blog.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Title,Body,Date")] Post post)
+        public ActionResult Create([Bind(Include = "Id,Title,Body")] Post post)
         {
             if (ModelState.IsValid)
             {
+                post.Author = db.Users.FirstOrDefault(u => u.UserName == User.Identity.Name);
+                post.Date = DateTime.Now;
                 db.Posts.Add(post);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -4,7 +4,7 @@
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<h2>Редакция</h2>
 
 
 @using (Html.BeginForm())
@@ -12,13 +12,13 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Post</h4>
+        <h4>Статия</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <h3>Заглавие</h3>   @*@Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
@@ -26,7 +26,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
+            <h4>Тяло</h4>    @*@Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
@@ -34,7 +34,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <h5><b>Дата</b></h5>   @*@Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })*@
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
@@ -43,7 +43,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Запази" class="btn btn-default" />
             </div>
         </div>
     </div>
