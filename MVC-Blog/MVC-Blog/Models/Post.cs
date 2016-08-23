@@ -17,7 +17,7 @@ namespace MVC_Blog.Models
         public int Id { get; set; }
 
         [Required]
-        [StringLength(200)]
+        [StringLength(250)]
         public string Title { get; set; }
 
         [Required]
