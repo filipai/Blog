@@ -18,7 +18,7 @@
         @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            <h3>Заглавие</h3>   @*@Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
@@ -26,7 +26,7 @@
         </div>
 
         <div class="form-group">
-            <h4>Тяло</h4>    @*@Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
@@ -34,9 +34,22 @@
         </div>
 
         <div class="form-group">
-            <h5><b>Дата</b></h5>   @*@Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+                @Html.LabelFor(model => model.Author, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select name="Author_Id">
+                    @foreach (var author in ViewBag.Authors)
+                    {
+                        <option value="@author.Id">@author.UserName</option>
+                    }
+                </select>
                 @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
             </div>
         </div>
