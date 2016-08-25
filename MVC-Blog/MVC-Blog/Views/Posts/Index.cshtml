@@ -1,21 +1,25 @@
 ﻿@using MVC_Blog.Classes;
 @using MVC_Blog.Models;
-@model IEnumerable<Post>
+@*@model IEnumerable<Post>*@
+
+@model PagedList.IPagedList<MVC_Blog.Models.Post>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Статии";
 }
 
-<h2>Index</h2>
+<h2>Статии</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Създай статия", "Create")
 </p>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "Posts", FormMethod.Get))
 {
     <p>
-        Немери ми: @Html.TextBox("SearchString")
+        Немери ми: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Търси" />
     </p>
 }
@@ -24,14 +28,14 @@
     <tr>
         <th>
             @*Заглавия*@    @*@Html.DisplayNameFor(model => model.Title)*@
-            @Html.ActionLink("Заглавие", "Index", new { sortOrder = ViewBag.TitleSortParm })
+            @Html.ActionLink("Заглавие", "Index", new { sortOrder = ViewBag.TitleSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             Съдържание  @*@Html.DisplayNameFor(model => model.Body)*@
         </th>
         <th>
             @*Дата*@    @*@Html.DisplayNameFor(model => model.Date)*@
-            @Html.ActionLink("Дата", "Index", new { sortOrder = ViewBag.DateSortParm })
+            @Html.ActionLink("Дата", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
             Автор
@@ -71,3 +75,9 @@
 }
 
 </table>
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
