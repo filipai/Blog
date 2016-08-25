@@ -11,6 +11,15 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm())
+{
+    <p>
+        Немери ми: @Html.TextBox("SearchString")
+        <input type="submit" value="Търси" />
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>

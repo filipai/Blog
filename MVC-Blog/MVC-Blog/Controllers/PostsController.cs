@@ -16,7 +16,7 @@ namespace MVC_Blog.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Posts
-        public ActionResult Index(string sortOrder)
+        public ActionResult Index(string sortOrder, string searchString)
         {
             ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
@@ -24,6 +24,13 @@ namespace MVC_Blog.Controllers
             Console.WriteLine(sortOrder);
             var posts = from p in db.Posts.Include(p => p.Author)
                         select p;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                posts = posts.Where(s => s.Title.Contains(searchString)
+                                       || s.Body.Contains(searchString));
+            }
+
             switch (sortOrder)
             {
                 case "title_desc":
