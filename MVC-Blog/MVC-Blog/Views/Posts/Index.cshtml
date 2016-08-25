@@ -14,13 +14,15 @@
 <table class="table">
     <tr>
         <th>
-            Заглавия    @*@Html.DisplayNameFor(model => model.Title)*@
+            @*Заглавия*@    @*@Html.DisplayNameFor(model => model.Title)*@
+            @Html.ActionLink("Заглавие", "Index", new { sortOrder = ViewBag.TitleSortParm })
         </th>
         <th>
             Съдържание  @*@Html.DisplayNameFor(model => model.Body)*@
         </th>
         <th>
-            Дата    @*@Html.DisplayNameFor(model => model.Date)*@
+            @*Дата*@    @*@Html.DisplayNameFor(model => model.Date)*@
+            @Html.ActionLink("Дата", "Index", new { sortOrder = ViewBag.DateSortParm })
         </th>
         <th>
             Автор

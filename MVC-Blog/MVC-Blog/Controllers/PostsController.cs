@@ -16,10 +16,32 @@ namespace MVC_Blog.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Posts
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder)
         {
-            var postsWithAuthors = db.Posts.Include(p => p.Author).ToList();
-            return View(postsWithAuthors);
+            ViewBag.TitleSortParm = String.IsNullOrEmpty(sortOrder) ? "title_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+
+            Console.WriteLine(sortOrder);
+            var posts = from p in db.Posts.Include(p => p.Author)
+                        select p;
+            switch (sortOrder)
+            {
+                case "title_desc":
+                    posts = posts.OrderByDescending(p => p.Title);
+                    break;
+                case "Date":
+                    posts = posts.OrderBy(p => p.Date);
+                    break;
+                case "date_desc":
+                    posts = posts.OrderByDescending(p => p.Date);
+                    break;
+                default:
+                    posts = posts.OrderBy(p => p.Title);
+                    break;
+            }
+            return View(posts.ToList());
+            //var postsWithAuthors = db.Posts.Include(p => p.Author).ToList();
+            //return View(postsWithAuthors);
         }
 
         // GET: Posts/Details/5
