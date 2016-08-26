@@ -8,7 +8,7 @@
     @foreach (var post in Model)
     {
         <article class="post col-md-12">
-            <h2 class="title">@Html.Raw(post.Title)</h2>
+            <h2 class="title"><a href="/Posts/Details/@post.Id">@Html.Raw(post.Title)</a></h2>
             <div class="about">
                 Публикация
                 @if (post.Author != null)
