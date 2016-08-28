@@ -18,7 +18,7 @@
 @using (Html.BeginForm("Index", "Posts", FormMethod.Get))
 {
     <p>
-        Немери ми: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Търси" />
     </p>
 }
@@ -58,7 +58,7 @@
         <td>
             @if (item.Author != null)
             {
-                @item.Author.UserName
+                @item.Author.FullName <i>(@item.Author.UserName)</i>
             }
             else
             {
