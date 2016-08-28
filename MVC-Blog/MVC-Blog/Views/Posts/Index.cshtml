@@ -43,7 +43,14 @@
             Действия
         </th>
     </tr>
-
+@if (Model.TotalItemCount < 1)
+            {
+    <tr>
+        <td>
+                <b>Няма намерени резултати.</b> 
+        </td>
+    </tr>
+            }
 @foreach (var item in Model) {
     <tr>
         <td>
