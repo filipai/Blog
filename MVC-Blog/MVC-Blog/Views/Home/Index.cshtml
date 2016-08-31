@@ -6,7 +6,7 @@
     ViewBag.Title = "Home Page";
 }
 
-<div>
+<div style="padding: 10px">
 @using (Html.BeginForm("Index", "Home", FormMethod.Get))
 {
      <p>
@@ -14,7 +14,7 @@
          <input class="btn btn-default" type="submit" value="Търси" />
      </p>
 }
-</div>
+</divclass="row">
 
 <section class="row">
     @foreach (var post in Model)
