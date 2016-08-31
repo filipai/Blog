@@ -29,7 +29,8 @@ namespace MVC_Blog.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 post = post.Where(s => s.Title.Contains(searchString)
-                                       || s.Body.Contains(searchString));
+                                       || s.Body.Contains(searchString)
+                                       || s.Author.FullName.Contains(searchString));
             }
 
             int pageSize = 3;

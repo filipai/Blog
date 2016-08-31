@@ -40,7 +40,8 @@ namespace MVC_Blog.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 posts = posts.Where(s => s.Title.Contains(searchString)
-                                       || s.Body.Contains(searchString));
+                                       || s.Body.Contains(searchString)
+                                       || s.Author.FullName.Contains(searchString));
             }
 
             switch (sortOrder)
