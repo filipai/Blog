@@ -1,8 +1,20 @@
-﻿@{
+﻿@model PagedList.IPagedList<MVC_Blog.Models.Post>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
     ViewBag.Title = "Home Page";
 }
 
-@model List<MVC_Blog.Models.Post>
+<div>
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+     <p>
+         @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+         <input type="submit" value="Търси" />
+     </p>
+}
+</div>
 
 <section class="row">
     @foreach (var post in Model)
@@ -10,7 +22,7 @@
         <article class="post col-md-12">
             <h2 class="title"><a href="/Posts/Details/@post.Id">@Html.Raw(post.Title)</a></h2>
             <div class="about">
-                Публикация
+                Публикувано
                 @if (post.Author != null)
                 {
                     @:от
@@ -23,4 +35,9 @@
         </article>
     }
 </section>
-   
+
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))   
