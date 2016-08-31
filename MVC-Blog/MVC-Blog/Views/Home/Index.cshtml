@@ -10,8 +10,8 @@
 @using (Html.BeginForm("Index", "Home", FormMethod.Get))
 {
      <p>
-         @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-         <input type="submit" value="Търси" />
+         @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control" })
+         <input class="btn btn-default" type="submit" value="Търси" />
      </p>
 }
 </div>
